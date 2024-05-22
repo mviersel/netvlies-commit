@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto my-4">
-    <Confetti ref="confetti" />
+    <Confetti :show="confettiShown" />
     <div class="bg-pink-500 p-5">
       <div class="flex items-center bg-white rounded-3xl p-2">
         <div class="text-gray-400 font-bold px-5">Start</div>
@@ -44,7 +44,6 @@ const increaseProgress = (value) => {
   let newProgress = progress.value + value;
   progress.value = newProgress > 100 ? 100 : newProgress;
   if (progress.value === 100 && !confettiShown.value) {
-    confetti.value.showConfetti();
     confettiShown.value = true;
   }
   saveProgress();

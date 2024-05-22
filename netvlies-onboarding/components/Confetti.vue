@@ -1,42 +1,77 @@
 <template>
-  <div></div>
-</template>
-
-<script>
-import confetti from 'canvas-confetti';
-
-export default {
-  name: 'Confetti',
-  methods: {
-    showConfetti() {
-      var duration = 3 * 1000; // Show confetti for 7 seconds
-      var end = Date.now() + duration;
-      var colors = ['#bb0000', '#ff0000', '#ff7300', '#fffb00', '#48ff00', '#00ff7e', '#00fff9', '#002aff', '#7e00ff', '#ff00ea']; // Add more colors
-
-      (function frame() {
-        confetti({
-          particleCount: 2,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 },
-          colors: colors
-        });
-        confetti({
-          particleCount: 2,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 },
-          colors: colors
-        });
-
-        if (Date.now() < end) {
-          requestAnimationFrame(frame);
-        }
-      }());
+  <div v-if="show" class="confetti-container">
+  <canvas ref="canvas"></canvas>
+  </div>
+  </template>
+   
+  <script setup>
+  import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
+  import confetti from 'canvas-confetti';
+   
+  const props = defineProps({
+    show: Boolean,
+  });
+   
+  const canvas = ref(null);
+  let confettiInstance;
+   
+  const startConfetti = () => {
+    if (canvas.value) {
+      confettiInstance = confetti.create(canvas.value, {
+        resize: true,
+        useWorker: true,
+      });
+   
+      confettiInstance({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
+   
+      // You can adjust the settings or trigger more confetti here if needed
     }
+  };
+   
+  const stopConfetti = () => {
+    if (confettiInstance) {
+      confettiInstance.reset();
+    }
+  };
+   
+  watch(() => props.show, (newVal) => {
+    if (newVal) {
+      startConfetti();
+    } else {
+      stopConfetti();
+    }
+  });
+   
+  onMounted(() => {
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+  });
+   
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize', resizeCanvas);
+    stopConfetti();
+  });
+   
+  const resizeCanvas = () => {
+    if (canvas.value) {
+      canvas.value.width = window.innerWidth;
+      canvas.value.height = window.innerHeight;
+    }
+  };
+  </script>
+   
+  <style scoped>
+  .confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
   }
-};
-</script>
-
-<style scoped>
-</style>
+  </style>
