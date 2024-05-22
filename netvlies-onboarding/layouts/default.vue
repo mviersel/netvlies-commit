@@ -31,9 +31,9 @@
 
 <script setup></script>
 
-<style scoped>
-  img {
-    height: 40px;
-    padding-block: 4px;
-  }
+<style lang="css" scoped>
+img {
+  height: 40px;
+  padding-block: 4px;
+}
 </style>
