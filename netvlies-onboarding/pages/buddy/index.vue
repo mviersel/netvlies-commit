@@ -11,10 +11,6 @@
       </button>
     </div>
 
-
-
-    <div class="h-8"></div>
-
     <div class="bg-white rounded-lg shadow-md p-4">
       <ul class="space-y-4">
         <li v-for="task in tasks" :key="task.id" class="flex items-center space-x-4">
@@ -31,16 +27,6 @@
         </li>
       </ul>
     </div>
-
-    <div>
-      <ul v-for="task in tasks" :key="task.id">
-        <div class="flex">
-          <ProgressCircle :title="task.title"/>
-        </div>
-      </ul>
-    </div>
-
-
 
   </div>
 </template>

@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1 class="">Home pagina</h1>
-    <ButtonSet />
 
   </div>
 </template>
