@@ -1,6 +1,6 @@
-<div align="center">
+<!-- <div align="center">
 ![Nuxtjs](https://img.shields.io/badge/Nuxt-002E3B?style=for-the-badge&logo=nuxtdotjs&logoColor=#00DC82)
-</div>
+</div> -->
 <br></br>
 
 <div align="center">
@@ -14,7 +14,7 @@
   <p align="center">
     De repo met het uitgewerkte project voor Netvlies
     <br>
-    <a href="">Bekijke de live demo</a>
+    <a href="https://netvlies-onboarding.netlify.app/">Bekijke de live demo</a>
   </p>
 
 </div>
